@@ -104,18 +104,26 @@
 ;;============================================
 ;; Remote moq
 ;;============================================
+
+;; next-id and get-next-id are just here to help generate new "permanent" ids...not needed
+;; once remote service that actually persists and generates id is implemeneted.
+
+;; maintain a local state variable for ids (
 (def next-id (atom 100))
 
+;; function to generate new id
 (defn get-next-id []
   (let [id @next-id]
     (swap! next-id inc)
     id))
 
 (defn remote-fn []
-  (fn [{:keys [remote]} cb]
+  (fn [{:keys [remote]} callback]
     (let [{[children] :children} (om.next/query->ast remote)
           temp-id (get-in children [:params :db/id])]
-      (cb [['user/created {:tempids {[:person/by-id temp-id] [:person/by-id (get-next-id)]}}]]))))
+      ;; execute callback function with a representation of a data structure that might be returned
+      ;; by a remote service that has the mapping of the temp-id to the actual id
+      (callback [['user/created {:tempids {[:person/by-id temp-id] [:person/by-id (get-next-id)]}}]]))))
 
 ;;============================================
 ;; Parser/Reconciler

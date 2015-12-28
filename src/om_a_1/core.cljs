@@ -114,7 +114,6 @@
 (defn remote-fn []
   (fn [{:keys [remote]} cb]
     (let [{[children] :children} (om.next/query->ast remote)
-          ;;{:type :root, :children [{:dispatch-key todos/complete, :key todos/complete, :params {:id #om/id["e45bb8ea-b861-45bf-bb6b-45eb7e919795"]}, :type :call}]}
           temp-id (get-in children [:params :db/id])]
       (cb [['user/created {:tempids {[:person/by-id temp-id] [:person/by-id (get-next-id)]}}]]))))
 

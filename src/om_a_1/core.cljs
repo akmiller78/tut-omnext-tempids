@@ -76,11 +76,10 @@
 
 (defn- get-people [state key]
   (let [st @state]
-    ; following uses the into xform (transducer)
     (into [] (map #(get-in st %)) (get st key))))
 
 (defmethod readf :users
-  [{:keys [state] :as env} key params]
+  [{:keys [state]} key _]
   {:value (get-people state key)})
 
 ;;============================================

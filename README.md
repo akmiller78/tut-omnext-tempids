@@ -1,10 +1,6 @@
-# om-a-1
+# tut-omnext-tempids
 
-FIXME: Write a one-line description of your library/project.
-
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
+Simple Om.next demo project that shows how the tempid migration works from a remote
 
 ## Setup
 

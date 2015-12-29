@@ -45,7 +45,7 @@
   Object
   (render [this]
     (let [{:keys [:user/first-name :user/last-name]} (om/props this)]
-      (dom/div nil (str first-name " " last-name)))))
+      (dom/li nil (str first-name " " last-name)))))
 
 (def person (om/factory Person {:keyfn :db/id}))
 
